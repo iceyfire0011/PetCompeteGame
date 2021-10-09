@@ -28,6 +28,7 @@ public class PetCompeteGameApplication implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception{
+        game.gameInit();
         System.out.println(game.gameFinish("player 1"));
     }
 }

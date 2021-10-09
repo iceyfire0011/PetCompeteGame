@@ -1,21 +1,32 @@
 package com.project.petcompetegame.controller;
 
+import com.project.petcompetegame.service.GameService.IGameService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import java.util.Scanner;
 
 @Controller
 public class Game{
-    public void gameInit(int numberOfPlayer, int numberOfRounds){
+    IGameService iGameService;
 
+    Game(IGameService _GameService){
+        this.iGameService = _GameService;
     }
 
-    public int roundIncrementer(int currentRound,int roundLimit){
-        if(currentRound==roundLimit){
-            return -1;
-        }
-        return currentRound++;
+    public void gameInit(){
+        Scanner sc = new Scanner(System.in);
+        int roundNumber = 0;
+        System.out.println("Please enter number of player (1-4): ");
+        int numberOfPlayer = sc.nextInt();
+        System.out.println("Please enter number of round (1-30): ");
+        int roundLimit = sc.nextInt();
+        System.out.println("Please enter balance for each player: ");
+        double balance = sc.nextDouble();
+        iGameService.gameRun(numberOfPlayer,roundNumber,roundLimit,balance);
     }
 
     public String gameFinish(String playerName){
-        return "Congratulation! The winner is: "+playerName;
+        return "Congratulation! The winner is: " + playerName;
     }
 }
